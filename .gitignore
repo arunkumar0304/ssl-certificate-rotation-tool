@@ -1,0 +1,14 @@
+node_modules/
+client/node_modules/
+.env
+.env.*
+!.env.example
+data/
+*.pem
+*.key
+*.db
+*.sqlite
+*.sqlite3
+dist/
+client/dist/
+.DS_Store

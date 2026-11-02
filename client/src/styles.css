@@ -1,0 +1,18 @@
+:root { color-scheme: light dark; --bd: #8884; --ok: #1a8f43; --warn: #c27a00; --bad: #d12f2f; }
+body { font: 14px system-ui, sans-serif; margin: 0; }
+main { max-width: 1040px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { margin: 0; } .sub { opacity: .7; margin-top: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 16px 0; }
+.card { border: 1px solid var(--bd); border-radius: 10px; padding: 12px 16px; }
+.card .n { font-size: 28px; font-weight: 700; }
+.card.ok .n { color: var(--ok); } .card.expiring .n { color: var(--warn); } .card.bad .n { color: var(--bad); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+button { padding: 6px 14px; border: 1px solid var(--bd); border-radius: 6px; background: transparent; color: inherit; cursor: pointer; }
+button:hover:not(:disabled) { background: #8882; } button:disabled { opacity: .5; cursor: wait; }
+button.warn { border-color: var(--warn); }
+.msg { margin: 8px 0; padding: 8px 12px; border: 1px solid var(--bd); border-radius: 6px; font-family: ui-monospace, monospace; font-size: 12px; word-break: break-all; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 8px; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--bd); white-space: nowrap; }
+.mono { font-family: ui-monospace, monospace; }
+.badge { padding: 2px 8px; border-radius: 99px; font-size: 12px; font-weight: 600; border: 1px solid currentColor; }
+.badge.ok { color: var(--ok); } .badge.expiring { color: var(--warn); } .badge.expired, .badge.unreachable { color: var(--bad); }

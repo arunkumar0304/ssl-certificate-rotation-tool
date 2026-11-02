@@ -1,0 +1,36 @@
+# One-command demo:  docker compose up --build
+# Dashboard: http://localhost:8000    Sites: https://localhost:8443 (site-a), https://localhost:8444 (site-b)
+x-nginx: &nginx
+  image: nginx:alpine
+  depends_on:
+    bootstrap: { condition: service_completed_successfully }
+
+services:
+  bootstrap:            # seeds both sites with 1-day certs so the first scan finds them "expiring"
+    build: .
+    command: ["node", "src/cli.js", "bootstrap", "--validity-days", "1"]
+    volumes: ["./data:/app/data"]
+
+  nginx-a:
+    <<: *nginx
+    ports: ["8443:443"]
+    volumes:
+      - ./data/certs/site-a:/etc/nginx/certs:ro
+      - ./nginx/site.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/watch.sh:/watch.sh:ro
+    command: ["sh", "/watch.sh"]
+
+  nginx-b:
+    <<: *nginx
+    ports: ["8444:443"]
+    volumes:
+      - ./data/certs/site-b:/etc/nginx/certs:ro
+      - ./nginx/site.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/watch.sh:/watch.sh:ro
+    command: ["sh", "/watch.sh"]
+
+  certrotator:
+    build: .
+    ports: ["8000:8000"]
+    volumes: ["./data:/app/data"]
+    depends_on: [nginx-a, nginx-b]

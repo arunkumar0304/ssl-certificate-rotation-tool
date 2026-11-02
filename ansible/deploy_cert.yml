@@ -1,0 +1,27 @@
+# Production deploy path: push cert+key to a remote web server / LB and reload it.
+# Run by app/deployers.py:AnsibleDeployer, or from AWX as a job template.
+- hosts: all
+  become: true
+  tasks:
+    - name: Install private key
+      ansible.builtin.copy:
+        src: "{{ key_src }}"
+        dest: "{{ key_dest }}"
+        owner: root
+        mode: "0600"
+      no_log: true
+      notify: reload service
+
+    - name: Install certificate chain
+      ansible.builtin.copy:
+        src: "{{ cert_src }}"
+        dest: "{{ cert_dest }}"
+        owner: root
+        mode: "0644"
+      notify: reload service
+
+  handlers:
+    - name: reload service
+      ansible.builtin.service:
+        name: "{{ reload_service | default('nginx') }}"
+        state: reloaded

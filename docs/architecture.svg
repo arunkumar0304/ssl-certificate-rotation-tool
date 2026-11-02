@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="Arial, sans-serif" font-size="13">
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#444"/></marker>
+<style>.b{fill:#eef4ff;stroke:#3b6fd4;stroke-width:1.5}.w{fill:#fff;stroke:#3b6fd4;stroke-width:1.2}.g{fill:#eefaf1;stroke:#2e8b57;stroke-width:1.5}.o{fill:#fff6e8;stroke:#d98a00;stroke-width:1.5}.l{stroke:#444;stroke-width:1.5;fill:none;marker-end:url(#a)}.t{text-anchor:middle}.s{font-size:11px}</style></defs>
+<text x="450" y="26" class="t" font-size="18" font-weight="bold">CertRotator - Architecture (Node.js / Express / React)</text>
+<rect class="o" x="20" y="60" width="170" height="70" rx="8"/><text x="105" y="88" class="t">React dashboard</text><text x="105" y="106" class="t s">(Vite) polls REST API</text>
+<rect class="b" x="260" y="50" width="380" height="330" rx="8"/><text x="450" y="72" class="t" font-weight="bold">Node.js service (Express)</text>
+<rect class="w" x="280" y="88" width="160" height="46" rx="6"/><text x="360" y="108" class="t">REST API</text><text x="360" y="124" class="t s">/api/certs /scan /renew /audit</text>
+<rect class="w" x="460" y="88" width="160" height="46" rx="6"/><text x="540" y="108" class="t">Scheduler</text><text x="540" y="124" class="t s">node-cron</text>
+<rect class="w" x="280" y="154" width="340" height="56" rx="6"/><text x="450" y="176" class="t" font-weight="bold">Renewal engine (service.js)</text><text x="450" y="194" class="t s">scan -> due? -> issue -> deploy -> verify new serial -> audit/alert</text>
+<rect class="w" x="280" y="232" width="100" height="46" rx="6"/><text x="330" y="252" class="t">Scanner</text><text x="330" y="268" class="t s">tls.connect</text>
+<rect class="w" x="395" y="232" width="100" height="46" rx="6"/><text x="445" y="252" class="t">Issuer</text><text x="445" y="268" class="t s">pluggable</text>
+<rect class="w" x="510" y="232" width="110" height="46" rx="6"/><text x="565" y="252" class="t">Deployer</text><text x="565" y="268" class="t s">pluggable</text>
+<rect class="w" x="280" y="298" width="200" height="44" rx="6"/><text x="380" y="324" class="t">SQLite: inventory + audit</text>
+<rect class="w" x="495" y="298" width="125" height="44" rx="6"/><text x="557" y="324" class="t">Alerts (webhook)</text>
+<rect class="g" x="720" y="50" width="160" height="78" rx="8"/><text x="800" y="78" class="t">ACME CA</text><text x="800" y="96" class="t s">Pebble / Let's Encrypt</text><text x="800" y="111" class="t s">(acme-client) or demo CA</text>
+<rect class="g" x="720" y="160" width="160" height="62" rx="8"/><text x="800" y="186" class="t">Ansible / AWX</text><text x="800" y="204" class="t s">or atomic file deploy</text>
+<rect class="g" x="720" y="256" width="160" height="110" rx="8"/><text x="800" y="280" class="t">TLS endpoints</text><text x="800" y="300" class="t s">nginx site-a :8443</text><text x="800" y="318" class="t s">nginx site-b :8444</text><text x="800" y="336" class="t s">(LBs / appliances)</text>
+<rect class="o" x="260" y="410" width="380" height="50" rx="8"/><text x="450" y="432" class="t">Slack / Teams webhook</text><text x="450" y="448" class="t s">renewal success + failure alerts</text>
+<path class="l" d="M190 95 L280 108"/>
+<path class="l" d="M540 134 L540 154"/><path class="l" d="M360 134 L360 154"/>
+<path class="l" d="M330 210 L330 232"/><path class="l" d="M445 210 L445 232"/><path class="l" d="M565 210 L565 232"/>
+<path class="l" d="M620 258 L720 190"/><path class="l" d="M495 255 L720 100"/>
+<path class="l" d="M800 222 L800 256"/>
+<path class="l" d="M380 278 L380 298"/><path class="l" d="M557 342 L557 410"/>
+<path class="l" d="M330 278 L330 392 L720 392 L720 340" style="stroke-dasharray:5 4"/>
+<text x="560" y="386" class="s">scan: read cert actually served</text><text x="640" y="200" class="s">push</text><text x="610" y="160" class="s">issue</text>
+</svg>

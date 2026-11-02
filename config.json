@@ -1,0 +1,26 @@
+{
+  "dbPath": "data/certrotator.db",
+  "renewBeforeDays": 30,
+  "schedule": "0 * * * *",
+  "alertWebhook": "",
+  "port": 8000,
+  "issuer": {
+    "type": "localCa",
+    "localCa": { "dir": "data/ca", "validityDays": 90 },
+    "acme": {
+      "directoryUrl": "https://localhost:14000/dir",
+      "email": "admin@example.com",
+      "webroot": "data/acme-webroot",
+      "stateDir": "data/acme"
+    }
+  },
+  "targets": [
+    {
+      "name": "site-a",
+      "domain": "site-a.local",
+      "host": "127.0.0.1",
+      "port": 8443,
+      "deploy": { "type": "file", "certPath": "data/certs/site-a/fullchain.pem", "keyPath": "data/certs/site-a/privkey.pem" }
+    }
+  ]
+}

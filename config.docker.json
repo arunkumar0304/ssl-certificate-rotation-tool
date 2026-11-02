@@ -1,0 +1,18 @@
+{
+  "dbPath": "data/certrotator.db",
+  "renewBeforeDays": 30,
+  "schedule": "* * * * *",
+  "alertWebhook": "",
+  "port": 8000,
+  "issuer": {
+    "type": "localCa",
+    "localCa": { "dir": "data/ca", "validityDays": 90 },
+    "acme": { "directoryUrl": "https://pebble:14000/dir", "email": "admin@example.com", "webroot": "data/acme-webroot", "stateDir": "data/acme" }
+  },
+  "targets": [
+    { "name": "site-a", "domain": "site-a.local", "host": "nginx-a", "port": 443,
+      "deploy": { "type": "file", "certPath": "data/certs/site-a/fullchain.pem", "keyPath": "data/certs/site-a/privkey.pem" } },
+    { "name": "site-b", "domain": "site-b.local", "host": "nginx-b", "port": 443,
+      "deploy": { "type": "file", "certPath": "data/certs/site-b/fullchain.pem", "keyPath": "data/certs/site-b/privkey.pem" } }
+  ]
+}
